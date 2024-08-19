@@ -4,14 +4,7 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
-// mongoose.connect('mongodb://localhost:27017/cfDB', {useNewUrlParser: true, useUnifiedTopology: true});
-mongoose.connect(
-  'mongodb+srv://jackpardini:42KpCEMJTfXwGYOE@myflixdb.t1qvfrl.mongodb.net/?retryWrites=true&w=majority&appName=myFlixDB&dbName=myFlixDB',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+mongoose.connect('mongodb://localhost:27017/cfDB', { useNewUrlParser: true, useUnifiedTopology: true });
 
 const express = require('express');
 const morgan = require('morgan');
@@ -231,12 +224,9 @@ app.put(
       //   Email: req.body.Email,
       //   Birthday: req.body.Birthday,
       // };
-      console.log(req.body);
 
       if (req.body.Password) {
-        console.log('1', req.body.Password);
         req.body.Password = await Users.hashPassword(req.body.Password);
-        console.log('Hashed', req.body.Password);
       }
 
       const updatedUser = await Users.findOneAndUpdate(
